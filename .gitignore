@@ -54,4 +54,5 @@ logs
 /src/main/webapp/logs/log.log4j
 /.idea
 /*.iml
+out
 /src/main/webapp/WEB-INF
