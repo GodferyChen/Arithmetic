@@ -49,6 +49,7 @@ public class Sequence {
             selector.next();
         }
     }
+
 }
 
 interface Selector{
