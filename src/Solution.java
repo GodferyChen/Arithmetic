@@ -9,7 +9,86 @@ public class Solution {
 //        int [] result = twoSumBetter(new int[]{2,7,11,15},9);
 //        System.out.println("result[0] = "+result[0]+",result[1]="+result[1]);
 //        System.out.println("汉明距离 " + hammingDistance2(1, 4));
-        System.out.println("value = " + findMaxConsecutiveOnesBetter(new int[]{1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1}));
+        System.out.println("value = " + reverseString3("helloWorld"));
+    }
+
+    /**
+     * Nim Game
+     * if ((n - 1) % 4 == 0 || (n - 2) % 4 == 0 || (n - 3) % 4== 0) return true;
+     else return false;
+     *进一步整理
+     *  return (n - 1) % 4 == 0 || (n - 2) % 4 == 0 || (n - 3) % 4 == 0;
+     * @param n
+     * @return
+     */
+    public static boolean canWinNim(int n) {
+        return n % 4 !=0;
+    }
+
+    /**
+     * Island Perimeter
+     * 解题思路：每个格子周长为4，两个格子相邻时周长-2
+     * @param grid
+     * @return
+     */
+    public static int islandPerimeter(int[][] grid) {
+        int perimeter = 0;
+        int n = grid.length;
+        int m = grid[0].length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if(grid[i][j] == 1){
+                    perimeter += 4;
+                    if(i > 0 && grid[i-1][j] == 1) perimeter -= 2;
+                    if(j > 0 && grid[i][j - 1] == 1) perimeter -= 2;
+                }
+            }
+        }
+        return perimeter;
+    }
+
+    /**
+     * Reverse String
+     * Write a function that takes a string as input and returns the string reversed.
+     * @param s
+     * @return
+     */
+    public static String reverseString(String s) {
+        char [] args = s.toCharArray();
+        char [] content = new char[args.length];
+        for (int i = 0; i < args.length ; i++) {
+            content[i] = args[args.length - i - 1];
+        }
+        return String.valueOf(content);
+    }
+
+    /**
+     * 直接使用StringBuffer类的reverse()方法
+     * @param s
+     * @return
+     */
+    public static String reverseString2(String s) {
+        return new StringBuffer(s).reverse().toString();
+    }
+
+    /**
+     * 异或预算满足交换律
+     * 时间复杂度仅为方法1的一半
+     * @param s
+     * @return
+     */
+    public static String reverseString3(String s){
+        char [] c = s.toCharArray();
+        int start = 0;
+        int end = c.length - 1;
+        while (start < end){
+            c[start] = (char) (c[start] ^ c[end]);
+            c[end] = (char) (c[start] ^ c[end]);
+            c[start] = (char) (c[start]^c[end]);
+            start++;
+            end--;
+        }
+        return String.valueOf(c);
     }
 
     /**
