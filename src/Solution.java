@@ -1,3 +1,6 @@
+import com.sun.deploy.util.ArrayUtil;
+import jdk.nashorn.internal.ir.LiteralNode;
+
 import java.util.*;
 
 /**
@@ -9,25 +12,133 @@ public class Solution {
 //        int [] result = twoSumBetter(new int[]{2,7,11,15},9);
 //        System.out.println("result[0] = "+result[0]+",result[1]="+result[1]);
 //        System.out.println("汉明距离 " + hammingDistance2(1, 4));
-        System.out.println("value = " + reverseString3("helloWorld"));
+        System.out.println("value = " + getSum(2, 6));
+    }
+
+    /**
+     * 解题思路：x^y 执行加法，不考虑进位
+     * (x&y)<<1 //进位操作
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public static int getSum(int a, int b) {
+        return b == 0 ? a : getSum((a ^ b), (a & b) << 1);
+    }
+
+    /**
+     * 解题思路一致，改用迭代
+     * @param a
+     * @param b
+     * @return
+     */
+    public static int getSum2(int a, int b){
+        while (b > 0){
+            int carry = (a & b) << 1;
+            a = a^b;
+            b = carry;
+        }
+        return a;
+    }
+
+    /**
+     * Construct the rectangle
+     * 解题思路：记area的平方根为sqrt
+     * 从int(sqrt) 向 1 递减枚举宽度W，若area % W == 0，则L = area / W
+     *
+     * @param area
+     * @return
+     */
+    public static int[] constructRectangle(int area) {
+        int[] res = new int[2];
+        int sqrt = (int) Math.sqrt(area);
+        for (int i = sqrt; i >= 1; i--) {
+            if (area % i == 0) {
+                res[0] = area / i;
+                res[1] = i;
+                break;
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Single Number
+     * 解题思路：取异或，相同为0，不同为1
+     *
+     * @param nums
+     * @return
+     */
+    public static int singleNumber(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            res ^= nums[i];
+        }
+        return res;
+    }
+
+    /**
+     * Find All Numbers Disappeared in an Array
+     *
+     * @param nums
+     * @return
+     */
+    public static List<Integer> findDisappearedNumbers(int[] nums) {
+        Arrays.sort(nums);
+        List<Integer> resArray = new ArrayList<>();
+        int[] temp = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            temp[i] = -1;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            temp[nums[i] - 1] = nums[i];
+        }
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] < 0) resArray.add(i + 1);
+        }
+        return resArray;
+    }
+
+    /**
+     * 解题思路：将其本应该在的位置设置为负值，最后遍历，为正的即为缺失值
+     *
+     * @param nums
+     * @return
+     */
+    public static List<Integer> findDisappearedNumbersBetter(int[] nums) {
+        List<Integer> resArray = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            int temp = Math.abs(nums[i]) - 1;
+            if (nums[temp] > 0) nums[temp] = -nums[temp];
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) resArray.add(i + 1);
+        }
+        return resArray;
     }
 
     /**
      * Nim Game
      * if ((n - 1) % 4 == 0 || (n - 2) % 4 == 0 || (n - 3) % 4== 0) return true;
-     else return false;
-     *进一步整理
-     *  return (n - 1) % 4 == 0 || (n - 2) % 4 == 0 || (n - 3) % 4 == 0;
+     * else return false;
+     * 进一步整理
+     * return (n - 1) % 4 == 0 || (n - 2) % 4 == 0 || (n - 3) % 4 == 0;
+     *
      * @param n
      * @return
      */
     public static boolean canWinNim(int n) {
-        return n % 4 !=0;
+        return n % 4 != 0;
     }
 
     /**
      * Island Perimeter
      * 解题思路：每个格子周长为4，两个格子相邻时周长-2
+     *
      * @param grid
      * @return
      */
@@ -37,10 +148,10 @@ public class Solution {
         int m = grid[0].length;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if(grid[i][j] == 1){
+                if (grid[i][j] == 1) {
                     perimeter += 4;
-                    if(i > 0 && grid[i-1][j] == 1) perimeter -= 2;
-                    if(j > 0 && grid[i][j - 1] == 1) perimeter -= 2;
+                    if (i > 0 && grid[i - 1][j] == 1) perimeter -= 2;
+                    if (j > 0 && grid[i][j - 1] == 1) perimeter -= 2;
                 }
             }
         }
@@ -50,13 +161,14 @@ public class Solution {
     /**
      * Reverse String
      * Write a function that takes a string as input and returns the string reversed.
+     *
      * @param s
      * @return
      */
     public static String reverseString(String s) {
-        char [] args = s.toCharArray();
-        char [] content = new char[args.length];
-        for (int i = 0; i < args.length ; i++) {
+        char[] args = s.toCharArray();
+        char[] content = new char[args.length];
+        for (int i = 0; i < args.length; i++) {
             content[i] = args[args.length - i - 1];
         }
         return String.valueOf(content);
@@ -64,6 +176,7 @@ public class Solution {
 
     /**
      * 直接使用StringBuffer类的reverse()方法
+     *
      * @param s
      * @return
      */
@@ -74,17 +187,18 @@ public class Solution {
     /**
      * 异或预算满足交换律
      * 时间复杂度仅为方法1的一半
+     *
      * @param s
      * @return
      */
-    public static String reverseString3(String s){
-        char [] c = s.toCharArray();
+    public static String reverseString3(String s) {
+        char[] c = s.toCharArray();
         int start = 0;
         int end = c.length - 1;
-        while (start < end){
+        while (start < end) {
             c[start] = (char) (c[start] ^ c[end]);
             c[end] = (char) (c[start] ^ c[end]);
-            c[start] = (char) (c[start]^c[end]);
+            c[start] = (char) (c[start] ^ c[end]);
             start++;
             end--;
         }
@@ -119,6 +233,7 @@ public class Solution {
      * 更优解：
      * 如果说当前位为0，那么连续1就结束了，最大的就是前面积累的maxHere，
      * 如果当前位是1，那么在当前积累的maxHere基础上加一
+     *
      * @param nums
      * @return
      */
