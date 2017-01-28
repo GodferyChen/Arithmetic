@@ -1,7 +1,7 @@
-import com.sun.deploy.util.ArrayUtil;
-import jdk.nashorn.internal.ir.LiteralNode;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by chen on 2017/1/21.
@@ -12,7 +12,51 @@ public class Solution {
 //        int [] result = twoSumBetter(new int[]{2,7,11,15},9);
 //        System.out.println("result[0] = "+result[0]+",result[1]="+result[1]);
 //        System.out.println("汉明距离 " + hammingDistance2(1, 4));
-        System.out.println("value = " + getSum(2, 6));
+        System.out.println("value = " + findTheDifference("hello","hekllo"));
+    }
+
+    /**
+     * Find the Difference
+     * 解题思路：根据异或的特性：相同为0，不同为1，所有的字母进行异或操作，得出的结果就是多的那个字母
+     * @param s
+     * @param t
+     * @return
+     */
+    public static char findTheDifference(String s, String t) {
+        char res = 0;
+        for (char item : s.toCharArray()) {
+            res ^= item;
+        }
+        for (char item: t.toCharArray()){
+            res ^= item;
+        }
+        return res;
+    }
+
+    /**
+     * Definition for a binary tree node.
+     */
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
+    /**
+     * Maximum Depth of Binary Tree
+     * 求二叉树的深度
+     * @param root
+     * @return
+     */
+    public static int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+        return left > right ? (left + 1) : (right + 1);
     }
 
     /**
@@ -28,15 +72,37 @@ public class Solution {
     }
 
     /**
-     * 解题思路一致，改用迭代
+     * 取补码
+     *
+     * @param a
+     * @return
+     */
+    public static int negative(int a) {
+        return getSum(~a, 1);
+    }
+
+    /**
+     * 用位运算实现相减
+     *
      * @param a
      * @param b
      * @return
      */
-    public static int getSum2(int a, int b){
-        while (b > 0){
+    public static int sub(int a, int b) {
+        return getSum(a, negative(b));
+    }
+
+    /**
+     * 解题思路一致，改用迭代
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public static int getSum2(int a, int b) {
+        while (b > 0) {
             int carry = (a & b) << 1;
-            a = a^b;
+            a = a ^ b;
             b = carry;
         }
         return a;
@@ -75,8 +141,8 @@ public class Solution {
             return -1;
         }
         int res = 0;
-        for (int i = 0; i < nums.length; i++) {
-            res ^= nums[i];
+        for (int num : nums) {
+            res ^= num;
         }
         return res;
     }
