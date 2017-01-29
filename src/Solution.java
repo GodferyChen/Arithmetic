@@ -12,12 +12,45 @@ public class Solution {
 //        int [] result = twoSumBetter(new int[]{2,7,11,15},9);
 //        System.out.println("result[0] = "+result[0]+",result[1]="+result[1]);
 //        System.out.println("汉明距离 " + hammingDistance2(1, 4));
-        System.out.println("value = " + findTheDifference("hello","hekllo"));
+        System.out.println("value = " + addDigits(49));
+    }
+
+    /**
+     * Invert Binary Tree
+     * 翻转二叉树，是树的基本操作之一,用递归行数更少，非递归用while语句即可
+     * @param root
+     * @return
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null) return null;
+        TreeNode temp = root.left;
+        root.left = invertTree(root.right);
+        root.right = invertTree(temp);
+        return root;
+    }
+
+    /**
+     * Add Digits
+     * @param num
+     * @return
+     */
+    public static int addDigits(int num) {
+        return num / 10 == 0 ? num : addDigits(num / 10 + num % 10);
+    }
+
+    /**
+     * 此解题是找规律得出的，每9个一循环，所有大于9的数的树根都是对9取余
+     * @param num
+     * @return
+     */
+    public static int addDigits2(int num) {
+        return (num - 1) % 9 + 1;
     }
 
     /**
      * Find the Difference
      * 解题思路：根据异或的特性：相同为0，不同为1，所有的字母进行异或操作，得出的结果就是多的那个字母
+     *
      * @param s
      * @param t
      * @return
@@ -27,7 +60,7 @@ public class Solution {
         for (char item : s.toCharArray()) {
             res ^= item;
         }
-        for (char item: t.toCharArray()){
+        for (char item : t.toCharArray()) {
             res ^= item;
         }
         return res;
@@ -49,6 +82,7 @@ public class Solution {
     /**
      * Maximum Depth of Binary Tree
      * 求二叉树的深度
+     *
      * @param root
      * @return
      */
