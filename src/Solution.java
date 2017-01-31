@@ -12,20 +12,67 @@ public class Solution {
 //        int [] result = twoSumBetter(new int[]{2,7,11,15},9);
 //        System.out.println("result[0] = "+result[0]+",result[1]="+result[1]);
 //        System.out.println("汉明距离 " + hammingDistance2(1, 4));
-        moveZeroes(new int[]{0,1,0,3,12});
+        moveZeroes(new int[]{0, 1, 0, 3, 12});
+    }
+
+    /**
+     * Minimum Moves to Equal Array Elements
+     * 解题思路：n为nums的数组长度，m为答案，x为最后全相等时的值
+     * sum(nums)+m(n-1)=xn
+     * min(nums)+m=x
+     * --》m=sum-min*n
+     * @param nums
+     * @return
+     */
+    public static int minMoves(int[] nums) {
+        if(nums == null) return 0;
+        int min = nums[0];
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+            min = Math.min(min, num);
+        }
+        return sum - min * nums.length;
+    }
+
+    /**
+     * Assign Cookies
+     * 解题思路：尽量给每个人能接受的最小的蛋糕就好，直接排序后，两个数组从头开始就
+     *
+     * @param g
+     * @param s
+     * @return
+     */
+    public static int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int res = 0;
+        int i = 0;
+        int j = 0;
+        while (i < g.length && j < s.length) {
+            if (g[i] <= s[j]) {
+                i++;
+                j++;
+                res++;
+            } else {
+                j++;
+            }
+        }
+        return res;
     }
 
     /**
      * Move Zeroes
      * 解题思路：将非0数字都尽可能向前排，将剩余的都置0
+     *
      * @param nums
      */
     public static void moveZeroes(int[] nums) {
-       int pos = 0;
+        int pos = 0;
         for (int i = 0; i < nums.length; i++) {
-            if(nums[i] !=0){
+            if (nums[i] != 0) {
                 nums[pos] = nums[i];
-                pos ++;
+                pos++;
             }
         }
         for (; pos < nums.length; pos++) {
@@ -446,6 +493,7 @@ public class Solution {
     /**
      * Two Sum II - Input array is sorted
      * 返回index[]
+     *
      * @param numbers
      * @param target
      * @return
@@ -455,11 +503,11 @@ public class Solution {
         for (int i = 0; i < numbers.length; i++) {
             if (map.get(numbers[i]) != null) {
                 int[] res = new int[2];
-                res[0] = i < map.get(numbers[i]) ? (i+1) : map.get(numbers[i]);
-                res[1] = i < map.get(numbers[i]) ? map.get(numbers[i]) : (i+1);
+                res[0] = i < map.get(numbers[i]) ? (i + 1) : map.get(numbers[i]);
+                res[1] = i < map.get(numbers[i]) ? map.get(numbers[i]) : (i + 1);
                 return res;
             }
-            map.put(target - numbers[i], i+1);
+            map.put(target - numbers[i], i + 1);
         }
         return new int[]{};
     }
