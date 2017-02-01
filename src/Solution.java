@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by chen on 2017/1/21.
@@ -12,7 +9,66 @@ public class Solution {
 //        int [] result = twoSumBetter(new int[]{2,7,11,15},9);
 //        System.out.println("result[0] = "+result[0]+",result[1]="+result[1]);
 //        System.out.println("汉明距离 " + hammingDistance2(1, 4));
-        moveZeroes(new int[]{0, 1, 0, 3, 12});
+        intersection(new int[]{1,2,2,1},new int[]{2,2,1});
+    }
+
+    /**
+     * Intersection of Two Arrays
+     * 利用HashMap或者HashSet解题
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public static int[] intersection(int[] nums1, int[] nums2) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for (int aNums1 : nums1) {
+            for (int aNums2 : nums2) {
+                if (aNums1 == aNums2) {
+                    map.put(aNums1, aNums2);
+                }
+            }
+        }
+        int [] res = new int[map.size()];
+        Iterator iterator = map.entrySet().iterator();
+        for (int i = 0; i < map.size(); i++) {
+            Map.Entry entry = (Map.Entry) iterator.next();
+            res[i] = (int) entry.getValue();
+        }
+        return res;
+    }
+
+    public static int[] intersection2(int[] nums1, int[] nums2) {
+       if(nums1 == null || nums2 == null) return null;
+       HashSet<Integer> hash = new HashSet<>();
+        for (int aNums1 : nums1) {
+            hash.add(aNums1);
+        }
+        HashSet<Integer> resHash = new HashSet<>();
+        for (int aNums2 : nums2) {
+            if (hash.contains(aNums2) && !resHash.contains(aNums2)) {
+                resHash.add(aNums2);
+            }
+        }
+        int [] res = new int[resHash.size()];
+        int index = 0;
+        for (int num : resHash) {
+            res[index++] = num;
+        }
+        return res;
+    }
+
+    /**
+     * Ransom Note
+     * 解题思路：只要判断ransomNote字符是不是全部在magazines中即可
+     * @param ransomNote
+     * @param magazine
+     * @return
+     */
+    public static boolean canConstruct(String ransomNote, String magazine) {
+        int [] cnt = new int[26];
+        for (int i = 0; i < magazine.length(); i++) cnt[magazine.charAt(i) - 'a']++;
+        for (int i = 0; i < ransomNote.length(); i++) if(--cnt[ransomNote.charAt(i)-'a'] < 0) return false;
+        return true;
     }
 
     /**
