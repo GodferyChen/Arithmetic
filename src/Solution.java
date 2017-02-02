@@ -13,6 +13,39 @@ public class Solution {
     }
 
     /**
+     * Best Time to Buy and Sell Stock II （贪心法）
+     * 解题思路：计算每个两个数的差值，大于0则相加，最后得出的就是最大的利润
+     * @param prices
+     * @return
+     */
+    public static int maxProfit(int[] prices) {
+        if(prices.length == 0) return 0;
+        int profit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            int diff = prices[i] - prices[i-1];
+            if(diff > 0) profit += diff;
+        }
+        return profit;
+    }
+
+    /**
+     * Submission Details
+     * 解题思路：利用递归
+     * @param root
+     * @return
+     */
+    public static int sumOfLeftLeaves(TreeNode root) {
+        return sumOfLeftLeaves(root,false);
+    }
+
+    public static int sumOfLeftLeaves(TreeNode root,boolean isLeft) {
+        if(root == null) return 0;
+        //是否是叶子节点
+        if(root.left == null && root.right == null && isLeft) return root.val;
+        return sumOfLeftLeaves(root.left,true)+sumOfLeftLeaves(root.right,false);
+    }
+
+    /**
      * Intersection of Two Arrays
      * 利用HashMap或者HashSet解题
      * @param nums1
