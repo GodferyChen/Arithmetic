@@ -6,24 +6,55 @@ import java.util.*;
 public class Solution {
 
     public static void main(String[] args) {
-//        int [] result = twoSumBetter(new int[]{2,7,11,15},9);
-//        System.out.println("result[0] = "+result[0]+",result[1]="+result[1]);
-//        System.out.println("汉明距离 " + hammingDistance2(1, 4));
-        intersection(new int[]{1,2,2,1},new int[]{2,2,1});
+        System.out.println(firstUniqChar("lovesandhellos"));
+    }
+
+
+    //Definition for singly-linked list.
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
+    /**
+     * Delete Node in a Linked List
+     * @param node
+     */
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+
+    /**
+     * First Unique Character in a String
+     *
+     * @param s
+     * @return
+     */
+    public static int firstUniqChar(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (s.lastIndexOf(s.charAt(i)) == s.indexOf(s.charAt(i))) return i;
+        }
+        return -1;
     }
 
     /**
      * Best Time to Buy and Sell Stock II （贪心法）
      * 解题思路：计算每个两个数的差值，大于0则相加，最后得出的就是最大的利润
+     *
      * @param prices
      * @return
      */
     public static int maxProfit(int[] prices) {
-        if(prices.length == 0) return 0;
+        if (prices.length == 0) return 0;
         int profit = 0;
         for (int i = 1; i < prices.length; i++) {
-            int diff = prices[i] - prices[i-1];
-            if(diff > 0) profit += diff;
+            int diff = prices[i] - prices[i - 1];
+            if (diff > 0) profit += diff;
         }
         return profit;
     }
@@ -31,29 +62,31 @@ public class Solution {
     /**
      * Submission Details
      * 解题思路：利用递归
+     *
      * @param root
      * @return
      */
     public static int sumOfLeftLeaves(TreeNode root) {
-        return sumOfLeftLeaves(root,false);
+        return sumOfLeftLeaves(root, false);
     }
 
-    public static int sumOfLeftLeaves(TreeNode root,boolean isLeft) {
-        if(root == null) return 0;
+    public static int sumOfLeftLeaves(TreeNode root, boolean isLeft) {
+        if (root == null) return 0;
         //是否是叶子节点
-        if(root.left == null && root.right == null && isLeft) return root.val;
-        return sumOfLeftLeaves(root.left,true)+sumOfLeftLeaves(root.right,false);
+        if (root.left == null && root.right == null && isLeft) return root.val;
+        return sumOfLeftLeaves(root.left, true) + sumOfLeftLeaves(root.right, false);
     }
 
     /**
      * Intersection of Two Arrays
      * 利用HashMap或者HashSet解题
+     *
      * @param nums1
      * @param nums2
      * @return
      */
     public static int[] intersection(int[] nums1, int[] nums2) {
-        HashMap<Integer,Integer> map = new HashMap<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
         for (int aNums1 : nums1) {
             for (int aNums2 : nums2) {
                 if (aNums1 == aNums2) {
@@ -61,7 +94,7 @@ public class Solution {
                 }
             }
         }
-        int [] res = new int[map.size()];
+        int[] res = new int[map.size()];
         Iterator iterator = map.entrySet().iterator();
         for (int i = 0; i < map.size(); i++) {
             Map.Entry entry = (Map.Entry) iterator.next();
@@ -71,8 +104,8 @@ public class Solution {
     }
 
     public static int[] intersection2(int[] nums1, int[] nums2) {
-       if(nums1 == null || nums2 == null) return null;
-       HashSet<Integer> hash = new HashSet<>();
+        if (nums1 == null || nums2 == null) return null;
+        HashSet<Integer> hash = new HashSet<>();
         for (int aNums1 : nums1) {
             hash.add(aNums1);
         }
@@ -82,7 +115,7 @@ public class Solution {
                 resHash.add(aNums2);
             }
         }
-        int [] res = new int[resHash.size()];
+        int[] res = new int[resHash.size()];
         int index = 0;
         for (int num : resHash) {
             res[index++] = num;
@@ -93,14 +126,15 @@ public class Solution {
     /**
      * Ransom Note
      * 解题思路：只要判断ransomNote字符是不是全部在magazines中即可
+     *
      * @param ransomNote
      * @param magazine
      * @return
      */
     public static boolean canConstruct(String ransomNote, String magazine) {
-        int [] cnt = new int[26];
+        int[] cnt = new int[26];
         for (int i = 0; i < magazine.length(); i++) cnt[magazine.charAt(i) - 'a']++;
-        for (int i = 0; i < ransomNote.length(); i++) if(--cnt[ransomNote.charAt(i)-'a'] < 0) return false;
+        for (int i = 0; i < ransomNote.length(); i++) if (--cnt[ransomNote.charAt(i) - 'a'] < 0) return false;
         return true;
     }
 
@@ -110,11 +144,12 @@ public class Solution {
      * sum(nums)+m(n-1)=xn
      * min(nums)+m=x
      * --》m=sum-min*n
+     *
      * @param nums
      * @return
      */
     public static int minMoves(int[] nums) {
-        if(nums == null) return 0;
+        if (nums == null) return 0;
         int min = nums[0];
         int sum = 0;
         for (int num : nums) {
