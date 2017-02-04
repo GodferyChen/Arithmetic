@@ -6,9 +6,37 @@ import java.util.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(firstUniqChar("lovesandhellos"));
+        System.out.println(titleToNumber("AAA"));
     }
 
+    /**
+     * Same Tree
+     * 树的解题大多都可以用递归
+     * @param p
+     * @param q
+     * @return
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p == null && q == null) return true;
+        if(p == null || q == null) return false;
+        if(p.val != q.val) return false;
+        return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+    }
+
+    /**
+     * Excel Sheet Column Number
+     * 26进制转十进制
+     * @param s
+     * @return
+     */
+    public static int titleToNumber(String s) {
+        if (s == null || s.length() == 0) return 0;
+        int res = 0;
+        for (int i = 0; i < s.length(); i++) {
+            res = res * 26 + s.charAt(i) - 'A' + 1;
+        }
+        return res;
+    }
 
     //Definition for singly-linked list.
     public class ListNode {
@@ -22,6 +50,8 @@ public class Solution {
 
     /**
      * Delete Node in a Linked List
+     * 解题思路：先把当前节点的值用下一个节点的值覆盖了，然后删除下一个节点即可
+     *
      * @param node
      */
     public void deleteNode(ListNode node) {
