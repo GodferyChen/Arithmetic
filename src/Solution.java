@@ -6,7 +6,38 @@ import java.util.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(titleToNumber("AAA"));
+        System.out.println(isAnagram("anagram","nagaram"));
+    }
+
+    /**
+     * Majority Element
+     * 解题思路：由于所求的数在数组中有多半，所以只要排序后取中间的数即可
+     * @param nums
+     * @return
+     */
+    public static int majorityElement(int[] nums) {
+       if(nums.length == 1) return nums[0];
+       Arrays.sort(nums);
+       return nums[nums.length/2];
+    }
+
+    /**
+     * Valid Anagram
+     * 解题思路：先判断长度是否一致，再排序后进行匹配
+     * @param s
+     * @param t
+     * @return
+     */
+    public static boolean isAnagram(String s, String t) {
+        if(s == null || t == null || s.length() != t.length()) return false;
+        char [] charListS = s.toCharArray();
+        char [] charListT = t.toCharArray();
+        Arrays.sort(charListS);
+        Arrays.sort(charListT);
+        for (int i = 0; i < charListS.length; i++) {
+            if(charListS[i] != charListT[i]) return false;
+        }
+        return true;
     }
 
     /**
