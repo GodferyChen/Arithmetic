@@ -10,6 +10,42 @@ public class Solution {
     }
 
     /**
+     * Contains Duplicate
+     * 解题思路：将每个数设置进map,然后跟数组比对长度
+     * @param nums
+     * @return
+     */
+    public static boolean containsDuplicate(int[] nums) {
+        if(nums == null || nums.length == 0) return false;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for (int num : nums) map.put(num, num);
+        return !(map.size() == nums.length);
+    }
+
+    /**
+     * 感觉这个效率高一点
+     * @param nums
+     * @return
+     */
+    public static boolean containsDuplicate2(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num :nums) {
+            if(set.contains(num)) return true;
+            set.add(num);
+        }
+        return false;
+    }
+
+    /**
+     * Longest Palindrome （最长回文子串）
+     * @param s
+     * @return
+     */
+    public static int longestPalindrome(String s) {
+        return 0;
+    }
+
+    /**
      * Majority Element
      * 解题思路：由于所求的数在数组中有多半，所以只要排序后取中间的数即可
      * @param nums
