@@ -1,3 +1,5 @@
+package sample;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,7 +9,7 @@ import java.util.Collections;
 public class Demo {
 
     public static void main(String[] args) {
-        tempValueWithData();
+        System.out.println((~2));
     }
 
     public static void tempValueWithData() {

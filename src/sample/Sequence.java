@@ -1,3 +1,5 @@
+package sample;
+
 /**
  * 链接到外部类
  * Created by chen on 2017/1/23.

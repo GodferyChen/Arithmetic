@@ -1,3 +1,5 @@
+package sample;
+
 /**
  * 工厂模式
  * Created by chen on 2017/1/23.
@@ -30,12 +32,12 @@ class Implementation1 implements Service{
 
     @Override
     public void method1() {
-        System.out.println("Implementation1.method1");
+        System.out.println("sample.sample.Implementation1.method1");
     }
 
     @Override
     public void method2() {
-        System.out.println("Implementation1.method2");
+        System.out.println("sample.sample.Implementation1.method2");
     }
 }
 
@@ -53,12 +55,12 @@ class Implementation2 implements Service{
 
     @Override
     public void method1() {
-        System.out.println("Implementation2.method1");
+        System.out.println("sample.sample.Implementation2.method1");
     }
 
     @Override
     public void method2() {
-        System.out.println("Implementation2.method2");
+        System.out.println("sample.sample.Implementation2.method2");
     }
 }
 

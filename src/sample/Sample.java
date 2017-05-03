@@ -1,4 +1,6 @@
-    import java.util.*;
+package sample;
+
+import java.util.*;
 
 /**
  * Created by chen on 2016/1/2.
@@ -29,7 +31,7 @@ public class Sample {
             map.put("key_number", getMaxNumber(value));
             list.add(map);
         }
-        System.out.println("Sample.getMaxValue = " + list.toString());
+        System.out.println("sample.sample.getMaxValue = " + list.toString());
         for (int i = 0; i < list.size(); i++) {
             HashMap<String, Integer> max = list.get(i);
             int n = i;
@@ -49,7 +51,7 @@ public class Sample {
             System.out.println("list.get(i) = " + max.get("key_number"));
         }
 
-        System.out.println("Sample.getMaxValue = " + list.toString());
+        System.out.println("sample.sample.getMaxValue = " + list.toString());
     }
 
     public static int getMaxNumber(int number) {
