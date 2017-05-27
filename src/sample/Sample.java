@@ -13,10 +13,14 @@ public class Sample {
     public static void main(String[] args) throws Exception {
 
 //        getMaxValue();
-        long startTime = System.currentTimeMillis();
-        long result = getFibonacciData(50);
-        long endTime = System.currentTimeMillis();
-        System.out.println("fibonacci = " + result+",time = " + (endTime - startTime));
+//        long startTime = System.currentTimeMillis();
+//        long result = getFibonacciData(50);
+//        long endTime = System.currentTimeMillis();
+//        System.out.println("fibonacci = " + result+",time = " + (endTime - startTime));
+
+        String txt = "";
+        String [] as = txt.split(",");
+        System.out.println("Sample.main " + as.length+" ,"+as[0]);
     }
 
     /**

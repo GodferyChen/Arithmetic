@@ -2,6 +2,9 @@ package sample;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by chen on 2017/1/28.
@@ -9,7 +12,14 @@ import java.util.Collections;
 public class Demo {
 
     public static void main(String[] args) {
-        System.out.println((~2));
+//        System.out.println((~2));
+        String otaVersion = "v1.3.0_Q8100003";
+        int firmwareVersion = Integer.parseInt(otaVersion.substring(1, 6).replace(".", ""));
+        int customVersion = Integer.parseInt(otaVersion.substring(otaVersion.length() - 6,
+                otaVersion.length()));
+        System.out.println("Demo.main firmwareVersion = " + firmwareVersion + ",customVersion = " + customVersion);
+
+        Executor executor = (Executor) new ThreadPoolExecutor.DiscardOldestPolicy();
     }
 
     public static void tempValueWithData() {
@@ -20,7 +30,7 @@ public class Demo {
         //反转
         int a = invert(source);
         //取反
-        a^=0xffff;
+        a ^= 0xffff;
         byte high1 = (byte) (a / 256);
         byte high2 = (byte) (a % 256);
         //两个byte换位,最好转成十进制

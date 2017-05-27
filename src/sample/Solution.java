@@ -7,32 +7,42 @@ import java.util.*;
  */
 public class Solution {
 
+    public static int ledIndex = 0;
+
     public static void main(String[] args) {
 
+    }
+
+    public String convertToBase7(int num) {
+        if (num < 0) return "-" + convertToBase7(-num);
+        if (num < 7) return String.valueOf(num);
+        return convertToBase7(num / 7) + (num % 7);
     }
 
     /**
      * Contains Duplicate
      * 解题思路：将每个数设置进map,然后跟数组比对长度
+     *
      * @param nums
      * @return
      */
     public static boolean containsDuplicate(int[] nums) {
-        if(nums == null || nums.length == 0) return false;
-        HashMap<Integer,Integer> map = new HashMap<>();
+        if (nums == null || nums.length == 0) return false;
+        HashMap<Integer, Integer> map = new HashMap<>();
         for (int num : nums) map.put(num, num);
         return !(map.size() == nums.length);
     }
 
     /**
      * 感觉这个效率高一点
+     *
      * @param nums
      * @return
      */
     public static boolean containsDuplicate2(int[] nums) {
         Set<Integer> set = new HashSet<>();
-        for (int num :nums) {
-            if(set.contains(num)) return true;
+        for (int num : nums) {
+            if (set.contains(num)) return true;
             set.add(num);
         }
         return false;
@@ -40,6 +50,7 @@ public class Solution {
 
     /**
      * Longest Palindrome （最长回文子串）
+     *
      * @param s
      * @return
      */
@@ -50,30 +61,32 @@ public class Solution {
     /**
      * Majority Element
      * 解题思路：由于所求的数在数组中有多半，所以只要排序后取中间的数即可
+     *
      * @param nums
      * @return
      */
     public static int majorityElement(int[] nums) {
-       if(nums.length == 1) return nums[0];
-       Arrays.sort(nums);
-       return nums[nums.length/2];
+        if (nums.length == 1) return nums[0];
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
     }
 
     /**
      * Valid Anagram
      * 解题思路：先判断长度是否一致，再排序后进行匹配
+     *
      * @param s
      * @param t
      * @return
      */
     public static boolean isAnagram(String s, String t) {
-        if(s == null || t == null || s.length() != t.length()) return false;
-        char [] charListS = s.toCharArray();
-        char [] charListT = t.toCharArray();
+        if (s == null || t == null || s.length() != t.length()) return false;
+        char[] charListS = s.toCharArray();
+        char[] charListT = t.toCharArray();
         Arrays.sort(charListS);
         Arrays.sort(charListT);
         for (int i = 0; i < charListS.length; i++) {
-            if(charListS[i] != charListT[i]) return false;
+            if (charListS[i] != charListT[i]) return false;
         }
         return true;
     }
@@ -81,20 +94,22 @@ public class Solution {
     /**
      * Same Tree
      * 树的解题大多都可以用递归
+     *
      * @param p
      * @param q
      * @return
      */
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        if(p == null && q == null) return true;
-        if(p == null || q == null) return false;
-        if(p.val != q.val) return false;
-        return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+        if (p == null && q == null) return true;
+        if (p == null || q == null) return false;
+        if (p.val != q.val) return false;
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 
     /**
      * Excel Sheet Column Number
      * 26进制转十进制
+     *
      * @param s
      * @return
      */
