@@ -10,7 +10,7 @@ public class Solution {
     public static int ledIndex = 0;
 
     public static void main(String[] args) {
-
+        System.out.println(findMaxConsecutiveOnesBetter(new int[]{1}));
     }
 
     public String convertToBase7(int num) {
