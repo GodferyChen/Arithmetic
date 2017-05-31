@@ -10,7 +10,123 @@ public class Solution {
     public static int ledIndex = 0;
 
     public static void main(String[] args) {
-        System.out.println(findMaxConsecutiveOnesBetter(new int[]{1}));
+        System.out.println(fibonacci(47));
+    }
+
+    public static int fibonacci(int n) {
+        if(n < 0){
+            return -1;
+        }else if(n == 0){
+            return 0;
+        }else if (n == 1 || n == 2){
+            return 1;
+        }else{
+            int c = 0, a = 1, b = 1;
+            for(int i = 3; i <= n; i++){
+                c = a + b;
+                a = b;
+                b = c;
+            }
+            return c;
+        }
+    }
+
+    /**
+     * @param head a ListNode
+     * @param val  an integer
+     * @return a ListNode
+     */
+    public ListNode removeElements(ListNode head, int val) {
+        if (head == null) {
+            return null;
+        }
+        ListNode result = head;
+        while (head.next != null) {
+            if (head.next.val == val) {
+                if (head.next.next != null) {
+                    head.next = head.next.next;
+                } else {
+                    head.next = null;
+                    break;
+                }
+            } else {
+                head = head.next;
+            }
+        }
+        if (head.val == val) {
+            return result.next;
+        }
+        return result;
+    }
+
+    /**
+     * 选择排序
+     *
+     * @param A an integer array
+     * @return void
+     */
+    public void sortIntegers(int[] A) {
+        for (int i = 0; i < A.length; i++) {
+            for (int j = i + 1; j < A.length; j++) {
+                if (A[i] > A[j]) {
+                    int temp = A[i];
+                    A[i] = A[j];
+                    A[j] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * 冒泡排序
+     *
+     * @param A an integer array
+     * @return void
+     */
+    public void sortIntegers1(int[] A) {
+        for (int i = 0; i < A.length - 1; i++) {
+            for (int j = 0; j < A.length - 1 - i; j++) {
+                if (A[j] > A[j + 1]) {
+                    int temp = A[j];
+                    A[j] = A[j + 1];
+                    A[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * 插入排序
+     *
+     * @param A an integer array
+     * @return void
+     */
+    public void sortIntegers2(int[] A) {
+        for (int i = 1; i < A.length; i++) {
+            for (int j = 0; j < A.length; j++) {
+                if (A[j] > A[i]) {
+                    int temp = A[j];
+                    A[j] = A[i];
+                    A[i] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * @param root the root of binary tree
+     * @return the max ndoe
+     */
+    private TreeNode max = new TreeNode(Integer.MIN_VALUE);
+
+    public TreeNode maxNode(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+        max = max.val > root.val ? max : root;
+        maxNode(root.left);
+        maxNode(root.right);
+        return max;
     }
 
     public String convertToBase7(int num) {
