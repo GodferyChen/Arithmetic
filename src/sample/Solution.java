@@ -13,16 +13,39 @@ public class Solution {
         System.out.println(fibonacci(47));
     }
 
+    /* 字符串置换
+     * @param A: a string
+     * @param B: a string
+     * @return: a boolean
+     */
+    public boolean Permutation(String A, String B) {
+        byte[] aBytes = A.getBytes();
+        byte[] bBytes = B.getBytes();
+        if (aBytes.length != bBytes.length) {
+            return false;
+        }
+        Arrays.sort(aBytes);
+        Arrays.sort(bBytes);
+        boolean result = true;
+        for (int i = 0; i < aBytes.length; i++) {
+            if (aBytes[i] != bBytes[i]) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
     public static int fibonacci(int n) {
-        if(n < 0){
+        if (n < 0) {
             return -1;
-        }else if(n == 0){
+        } else if (n == 0) {
             return 0;
-        }else if (n == 1 || n == 2){
+        } else if (n == 1 || n == 2) {
             return 1;
-        }else{
+        } else {
             int c = 0, a = 1, b = 1;
-            for(int i = 3; i <= n; i++){
+            for (int i = 3; i <= n; i++) {
                 c = a + b;
                 a = b;
                 b = c;
