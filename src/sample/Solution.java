@@ -13,6 +13,22 @@ public class Solution {
         System.out.println(fibonacci(47));
     }
 
+    /* 回文数
+    * @param num: a positive number
+    * @return: true if it's a palindrome or false
+    */
+    public boolean isPalindrome(int num) {
+        boolean result = true;
+        byte[] bytes = String.valueOf(num).getBytes();
+        for (int i = 0; i < bytes.length / 2; i++) {
+            if (bytes[i] != bytes[bytes.length - i - 1]){
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
     /* 字符串置换
      * @param A: a string
      * @param B: a string
