@@ -21,7 +21,7 @@ public class Solution {
         boolean result = true;
         byte[] bytes = String.valueOf(num).getBytes();
         for (int i = 0; i < bytes.length / 2; i++) {
-            if (bytes[i] != bytes[bytes.length - i - 1]){
+            if (bytes[i] != bytes[bytes.length - i - 1]) {
                 result = false;
                 break;
             }
@@ -346,30 +346,30 @@ public class Solution {
         return sumOfLeftLeaves(root.left, true) + sumOfLeftLeaves(root.right, false);
     }
 
-    /**
-     * Intersection of Two Arrays
-     * 利用HashMap或者HashSet解题
-     *
-     * @param nums1
-     * @param nums2
-     * @return
-     */
-    public static int[] intersection(int[] nums1, int[] nums2) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int aNums1 : nums1) {
-            for (int aNums2 : nums2) {
-                if (aNums1 == aNums2) {
-                    map.put(aNums1, aNums2);
-                }
+    /*两数组的交
+  * @param nums1: an integer array
+  * @param nums2: an integer array
+  * @return: an integer array
+  */
+    public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int num : nums2) {
+            set.add(num);
+        }
+        HashSet<Integer> re = new HashSet<>();
+        for (int num : nums1) {
+            if (set.contains(num)) {
+                re.add(num);
             }
         }
-        int[] res = new int[map.size()];
-        Iterator iterator = map.entrySet().iterator();
-        for (int i = 0; i < map.size(); i++) {
-            Map.Entry entry = (Map.Entry) iterator.next();
-            res[i] = (int) entry.getValue();
+        int[] args = new int[re.size()];
+        Iterator<Integer> iterator = re.iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            args[i] = iterator.next();
+            i++;
         }
-        return res;
+        return args;
     }
 
     public static int[] intersection2(int[] nums1, int[] nums2) {
@@ -388,6 +388,33 @@ public class Solution {
         int index = 0;
         for (int num : resHash) {
             res[index++] = num;
+        }
+        return res;
+    }
+
+
+    /**
+     * Intersection of Two Arrays
+     * 利用HashMap或者HashSet解题
+     *
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public static int[] intersection3(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int aNums1 : nums1) {
+            for (int aNums2 : nums2) {
+                if (aNums1 == aNums2) {
+                    map.put(aNums1, aNums2);
+                }
+            }
+        }
+        int[] res = new int[map.size()];
+        Iterator iterator = map.entrySet().iterator();
+        for (int i = 0; i < map.size(); i++) {
+            Map.Entry entry = (Map.Entry) iterator.next();
+            res[i] = (int) entry.getValue();
         }
         return res;
     }
