@@ -13,6 +13,16 @@ public class Solution {
         System.out.println(fibonacci(47));
     }
 
+    /*移动零
+    * @param nums: an integer array
+    * @return:
+    */
+//    public void moveZeroes(int[] nums) {
+//        for (int i = 0; i < nums.length; i++) {
+//
+//        }
+//    }
+
     /* 回文数
     * @param num: a positive number
     * @return: true if it's a palindrome or false
