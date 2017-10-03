@@ -13,15 +13,26 @@ public class Solution {
         System.out.println(fibonacci(47));
     }
 
-    /*移动零
-    * @param nums: an integer array
-    * @return:
-    */
-//    public void moveZeroes(int[] nums) {
-//        for (int i = 0; i < nums.length; i++) {
-//
-//        }
-//    }
+    /**
+     *
+     * @param num: An integer
+     * @return: true if num is an ugly number or false
+     */
+    public boolean isUgly(int num) {
+        if(num == 0){
+            return false;
+        }
+       while (num % 2 == 0){
+           num /= 2;
+       }
+       while (num % 3 == 0){
+           num /= 3;
+       }
+       while (num % 5 == 0){
+           num /= 5;
+       }
+       return num == 1;
+    }
 
     /* 回文数
     * @param num: a positive number
