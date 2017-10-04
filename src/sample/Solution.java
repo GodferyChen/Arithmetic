@@ -13,6 +13,15 @@ public class Solution {
         System.out.println(fibonacci(47));
     }
 
+    /*
+     * @param n: An integer
+     * @return: true if this is a happy number or false
+     */
+    public boolean isHappy(int n) {
+        // write your code here
+        return true;
+    }
+
     /**
      *
      * @param num: An integer
