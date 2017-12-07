@@ -1,5 +1,9 @@
 package test;
 
+import sun.rmi.runtime.Log;
+
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by chen on 2017/12/1.
  */
@@ -15,6 +19,9 @@ public class Sample {
         }
 //        bytes[bytes.length - 1] = checkSum;
         System.out.println("checkSum = " + byteArray2HexString(new byte[]{checkSum}));
+
+        String num = "9394300100000007";
+        System.out.println("Sample.main " + byteArray2HexString(string2ASCIIByteArray(num)));
     }
 
     /**
@@ -35,6 +42,18 @@ public class Sample {
             sbd.append(tmp);
         }
         return sbd.toString();
+    }
+
+    public static byte[] string2ASCIIByteArray(String var0) {
+        byte[] var1 = null;
+
+        try {
+            var1 = var0.getBytes("gbk");
+        } catch (UnsupportedEncodingException var3) {
+            var3.printStackTrace();
+        }
+
+        return var1;
     }
 
 }
