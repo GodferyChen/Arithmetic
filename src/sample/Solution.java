@@ -10,7 +10,52 @@ public class Solution {
     public static int ledIndex = 0;
 
     public static void main(String[] args) {
-        System.out.println(fibonacci(47));
+        System.out.println(sumString("119999", "990001"));
+    }
+
+//    function sum(str1, str2) {
+//        let res = '',
+//                next = 0
+//        str1 = str1.split(''),
+//                str2 = str2.split('')
+//        while (str1.length || str2.length || next) {
+//            next += ~~str1.pop() + ~~str2.pop()
+//            res = next % 10 + res
+//            next = next > 9
+//        }
+//        return res.replace(/^0+/, '')
+//    }
+
+    /**
+     * 两个字符串相加
+     * @param str1
+     * @param str2
+     * @return
+     */
+    public static String sumString(String str1, String str2) {
+        int len = str1.length() - str2.length();
+        //补0
+        if (len > 0) {
+            for (int i = 0; i < len; i++) {
+                str2 = "0" + str2;
+            }
+        } else if (len < 0) {
+            for (int i = 0; i < Math.abs(len); i++) {
+                str1 = "0" + str1;
+            }
+        }
+        //此字段表示进位的值
+        int num = 0;
+        String result = "";
+        for (int i = str1.length() - 1; i >= 0; i--) {
+            int sum = Character.getNumericValue(str1.charAt(i)) + Character.getNumericValue(str2.charAt(i)) + num;
+            num = sum > 9 ? 1 : 0;
+            result = sum % 10 + result;
+        }
+        if (num > 0) {
+            result = num + result;
+        }
+        return result;
     }
 
     /*
@@ -23,24 +68,23 @@ public class Solution {
     }
 
     /**
-     *
      * @param num: An integer
      * @return: true if num is an ugly number or false
      */
     public boolean isUgly(int num) {
-        if(num == 0){
+        if (num == 0) {
             return false;
         }
-       while (num % 2 == 0){
-           num /= 2;
-       }
-       while (num % 3 == 0){
-           num /= 3;
-       }
-       while (num % 5 == 0){
-           num /= 5;
-       }
-       return num == 1;
+        while (num % 2 == 0) {
+            num /= 2;
+        }
+        while (num % 3 == 0) {
+            num /= 3;
+        }
+        while (num % 5 == 0) {
+            num /= 5;
+        }
+        return num == 1;
     }
 
     /* 回文数
