@@ -12,6 +12,11 @@ public class Reflection {
         Class userBeanClass = null;
         try {
             userBeanClass = Class.forName("sample.UserBean");
+            Class userBeanClass1 = UserBean.class;
+            Class userBeanClass2 = new UserBean().getClass();
+
+            System.out.println(userBeanClass == userBeanClass1);
+            System.out.println(userBeanClass == userBeanClass2);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -70,27 +75,27 @@ public class Reflection {
                 }
             }else {
                 Class[] params = {String.class,long.class};
-                try {
-                    //获取参数格式为String,long的构造函数
-                    Constructor constructor = userBeanClass.getDeclaredConstructor(params);
-                    //利用构造函数进行实例化，得到Object
-                    Object userBean = constructor.newInstance();
-                    if(Modifier.isPrivate(method.getModifiers())){
-                        //如果是 private 的方法，需要获取调用权限
-                        method.setAccessible(true);
-                    }
-
-                    //调用 method ，无须参数
-                    method.invoke(userBean);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    //获取参数格式为String,long的构造函数
+//                    Constructor constructor = userBeanClass.getDeclaredConstructor(params);
+//                    //利用构造函数进行实例化，得到Object
+//                    Object userBean = constructor.newInstance();
+//                    if(Modifier.isPrivate(method.getModifiers())){
+//                        //如果是 private 的方法，需要获取调用权限
+//                        method.setAccessible(true);
+//                    }
+//
+//                    //调用 method ，无须参数
+//                    method.invoke(userBean);
+//                } catch (NoSuchMethodException e) {
+//                    e.printStackTrace();
+//                } catch (IllegalAccessException e) {
+//                    e.printStackTrace();
+//                } catch (InstantiationException e) {
+//                    e.printStackTrace();
+//                } catch (InvocationTargetException e) {
+//                    e.printStackTrace();
+//                }
             }
         }
     }

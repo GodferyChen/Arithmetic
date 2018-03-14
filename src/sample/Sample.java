@@ -17,6 +17,8 @@ public class Sample {
 //        long result = getFibonacciData(50);
 //        long endTime = System.currentTimeMillis();
 //        System.out.println("fibonacci = " + result+",time = " + (endTime - startTime));
+        boolean b = "1.4.7".compareToIgnoreCase("1.4.8") < 0;
+        System.out.println("boolean : " + b);
     }
 
     /**
@@ -24,7 +26,7 @@ public class Sample {
      */
     public static void getMaxValue() {
         int[] values = {50, 2, 1, 9};
-        List<HashMap<String,Integer>> list = new ArrayList<>();
+        List<HashMap<String, Integer>> list = new ArrayList<>();
         for (int value : values) {
             HashMap<String, Integer> map = new HashMap<>();
             map.put("key_value", value);
@@ -35,8 +37,8 @@ public class Sample {
         for (int i = 0; i < list.size(); i++) {
             HashMap<String, Integer> max = list.get(i);
             int n = i;
-            for (int j = i+1; j < list.size(); j++) {
-                if(list.get(j).get("key_number") > max.get("key_number")){
+            for (int j = i + 1; j < list.size(); j++) {
+                if (list.get(j).get("key_number") > max.get("key_number")) {
                     max = list.get(j);
                     n = j;
                     System.out.println("j = " + max.toString());
@@ -45,8 +47,8 @@ public class Sample {
             System.out.println("j = " + max.toString());
 //            list.get(n).put("key_value",list.get(i).get("key_value"));
 //            list.get(n).put("key_number",list.get(i).get("key_number"));
-            list.get(i).put("key_value",max.get("key_value"));
-            list.get(i).put("key_number",max.get("key_number"));
+            list.get(i).put("key_value", max.get("key_value"));
+            list.get(i).put("key_number", max.get("key_number"));
             System.out.println("list.get(n) = " + list.get(n).toString());
             System.out.println("list.get(i) = " + max.get("key_number"));
         }
@@ -64,18 +66,18 @@ public class Sample {
     }
 
     public static long getFibonacciData(int num) throws Exception {
-        if(num == 0){
+        if (num == 0) {
             return 0;
-        }else if(num == 1 || num == 2){
+        } else if (num == 1 || num == 2) {
             return 1;
-        }else if(num > 2){
+        } else if (num > 2) {
             long result = getFibonacciData(num - 1) + getFibonacciData(num - 2);
-            if(result < 0){
+            if (result < 0) {
                 throw new Exception("result is too large!");
-            }else {
+            } else {
                 return result;
             }
-        }else {
+        } else {
             throw new Exception("please enter num >= 0");
         }
     }

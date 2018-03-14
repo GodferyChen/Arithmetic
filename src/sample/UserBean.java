@@ -7,6 +7,16 @@ public class UserBean {
 
     private String userName;
     private long userId;
+    static String copyright = "";
+
+    static {
+        System.out.println("UserBean.static initializer");
+        copyright = "初始化 copyright";
+    }
+
+    public UserBean(){
+
+    }
 
     public UserBean(String userName,long userId){
         this.userName = userName;
